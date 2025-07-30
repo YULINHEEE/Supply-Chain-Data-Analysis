@@ -2,63 +2,42 @@
 
 This project focuses on analyzing supply chain data to identify patterns, assess delivery risks, and visualize geographic performance. The analysis aims to provide insights that can help improve supply chain efficiency and reduce delays.
 
-## Project Structure
+##  Tools & Technologies
 
-```
-supply-chain-analysis
-├── src
-│   ├── analysis
-│   │   ├── exploratory_analysis.py
-│   │   ├── geographic_analysis.py
-│   │   └── delivery_risk_analysis.py
-│   ├── data
-│   │   ├── preprocessing.py
-│   │   └── data_loader.py
-│   ├── models
-│   │   ├── logistic_regression.py
-│   │   └── model_evaluation.py
-│   ├── visualization
-│   │   ├── frequency_plots.py
-│   │   └── geographic_plots.py
-│   └── utils
-│       └── helpers.py
-├── notebooks
-│   ├── exploratory_analysis.ipynb
-│   ├── geographic_analysis.ipynb
-│   └── model_training.ipynb
-├── data
-│   ├── raw
-│   └── processed
-├── results
-│   ├── figures
-│   └── reports
-├── requirements.txt
-└── .gitignore
-```
+- **Python (Pandas, NumPy)** – data manipulation and feature engineering  
+- **Scikit-learn** – modeling pipeline, preprocessing, classification, evaluation  
+- **Matplotlib & Seaborn** – data visualization and feature importance plotting  
+- **Statistical tests** – Cramér’s V and Chi-squared test for feature significance  
+- **Jupyter Notebook** – interactive development environment
 
-## Installation
+## Workflow Overview
 
-To set up the project, clone the repository and install the required dependencies:
+1. **Data Preprocessing**
+   - Cleaned raw order data
+   - Encoded categorical features using OneHotEncoder
+   - Engineered key features like `Shipping Route` and `Route Delay Rate`
 
-```bash
-git clone <repository-url>
-cd supply-chain-analysis
-pip install -r requirements.txt
-```
+2. **Exploratory Analysis**
+   - Analyzed relationships between delay risk and features such as shipping mode, customer segment, and order month
+   - Identified statistically significant variables using Cramér’s V
 
-## Usage
+3. **Modeling**
+   - Trained and evaluated two classification models:
+     - **Logistic Regression** (baseline)
+     - **Random Forest Classifier** (non-linear)
+   - Metrics: Accuracy, Precision, Recall, F1, AUC
 
-1. **Data Loading**: Use the `data_loader.py` module to load raw data from the `data/raw` directory.
-2. **Data Preprocessing**: Clean and preprocess the data using functions in `preprocessing.py`.
-3. **Exploratory Analysis**: Perform exploratory data analysis using the Jupyter notebooks located in the `notebooks` directory.
-4. **Geographic Analysis**: Analyze geographic performance using the `geographic_analysis.py` module.
-5. **Delivery Risk Analysis**: Assess delivery risks with the `delivery_risk_analysis.py` module.
-6. **Model Training**: Train models using the `logistic_regression.py` module and evaluate them with `model_evaluation.py`.
-7. **Visualization**: Generate visualizations using the `visualization` module.
+4. **Results**
+   - **Random Forest outperformed Logistic Regression**, with higher AUC and recall
+   - Most important features: `Shipping Mode`, `Route Delay Rate`, and `Customer Segment`
 
-## Results
+5. **Visualization**
+   - Bar chart of top 20 feature importances
+   - Heatmap and route-level analysis of high-risk shipping paths
 
-Generated figures and reports will be stored in the `results` directory. Check the `results/figures` and `results/reports` folders for outputs.
+## Key Insight:
+
+Shipping mode and route history are strong predictors of late delivery. Integrating route-level risk features significantly improves model performance.
 
 ## Contributing
 
